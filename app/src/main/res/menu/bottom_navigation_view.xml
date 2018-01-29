@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/bottom_navigation_view_1"
+        android:icon="@drawable/ic_home"
+        android:title="@string/app_home" />
+    <item
+        android:id="@+id/bottom_navigation_view_2"
+        android:icon="@drawable/ic_diamond"
+        android:title="@string/app_diamond" />
+    <item
+        android:id="@+id/bottom_navigation_view_3"
+        android:icon="@drawable/ic_focus"
+        android:title="@string/app_focus" />
+    <item
+        android:id="@+id/bottom_navigation_view_4"
+        android:icon="@drawable/ic_setting"
+        android:title="@string/app_setting" />
+
+
+</menu>

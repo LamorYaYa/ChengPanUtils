@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">测试</string>
+    <string name="app_home">主一页</string>
+    <string name="app_diamond">主二页</string>
+    <string name="app_focus">主三页</string>
+    <string name="app_setting">主四页</string>
+    <string name="loaded_failed">(┬＿┬)加载失败了!</string>
+    <string name="retry">重试</string>
+</resources>

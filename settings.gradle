@@ -1,0 +1,1 @@
+include ':app', ':lib-lahuo', ':lib-dex', ':lib-sdk', ':lib-java'

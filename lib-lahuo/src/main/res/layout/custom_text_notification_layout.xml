@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:gravity="center"
+    android:background="#fff"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp">
+
+    <TextView
+        android:id="@+id/custom_text_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:lines="1"
+        android:text="魔兽世界：这是一个垃圾的游戏，哈哈哈！！"
+        android:textColor="@color/custom_text_title_color"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/custom_text_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/custom_text_title"
+        android:layout_marginTop="8dp"
+        android:ellipsize="end"
+        android:lines="1"
+        android:text="魔兽世界：这是一个垃圾的游戏，哈哈哈！！"
+        android:textColor="@color/custom_line_text_color"
+        android:textSize="15sp" />
+
+
+</RelativeLayout>

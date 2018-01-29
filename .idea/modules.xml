@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/ChengPanUtils.iml" filepath="$PROJECT_DIR$/ChengPanUtils.iml" />
+      <module fileurl="file://E:\AndroidProjects\ChengPanUtils\lib-annotation\annotation.iml" filepath="E:\AndroidProjects\ChengPanUtils\lib-annotation\annotation.iml" />
+      <module fileurl="file://E:\AndroidProjects\ChengPanUtils\lib-api\api.iml" filepath="E:\AndroidProjects\ChengPanUtils\lib-api\api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lib-dex/lib-dex.iml" filepath="$PROJECT_DIR$/lib-dex/lib-dex.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lib-java/lib-java.iml" filepath="$PROJECT_DIR$/lib-java/lib-java.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lib-lahuo/lib-lahuo.iml" filepath="$PROJECT_DIR$/lib-lahuo/lib-lahuo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lib-sdk/lib-sdk.iml" filepath="$PROJECT_DIR$/lib-sdk/lib-sdk.iml" />
+    </modules>
+  </component>
+</project>
