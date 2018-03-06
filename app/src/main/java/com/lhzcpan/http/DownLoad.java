@@ -26,6 +26,7 @@ public class DownLoad implements Serializable {
     private static final int PUBLISH = 2;               // 更新进度
     private static final int ERROR = 3;                 // 下载错误
     private static final int SUCCESS = 4;               // 下载成功
+    private static final int FAIL = 5;                  // 下载失败
 
     private OnDownloadListener mListener;               // 监听器
 
@@ -61,6 +62,9 @@ public class DownLoad implements Serializable {
                         break;
                     case SUCCESS:
                         mListener.onSuccess((Bean) msg.obj);
+                        break;
+                    case FAIL:
+                        mListener.onError((Bean) msg.obj);
                         break;
                 }
             }
@@ -123,13 +127,13 @@ public class DownLoad implements Serializable {
             mHttpURLConnection.setConnectTimeout(3000);
 
             msg = handler.obtainMessage();
-            msg.what = START;
             msg.obj = bean;
 
             int iResponseCode = mHttpURLConnection.getResponseCode();
             if (iResponseCode == 200) {
                 int filesize = mHttpURLConnection.getContentLength();
 
+                msg.what = START;
                 msg.arg1 = filesize;
                 handler.sendMessage(msg);
 
@@ -153,6 +157,9 @@ public class DownLoad implements Serializable {
                 msg = handler.obtainMessage();
                 msg.what = SUCCESS;
                 msg.obj = bean;
+                handler.sendMessage(msg);
+            } else {
+                msg.what = FAIL;
                 handler.sendMessage(msg);
             }
         } catch (Exception e) {

@@ -10,7 +10,7 @@ import android.content.SharedPreferences;
 public class SharedPreferencesUtil {
 
     private Context context;
-    private String FILE_NAME = "CHANNEL_FILE";
+    private String FILE_NAME = "SHARED_PREFERENCES_UTIL";
     private static SharedPreferencesUtil sharedPreferencesUtil = null;
 
 

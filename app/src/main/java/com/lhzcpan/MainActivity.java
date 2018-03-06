@@ -4,10 +4,11 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 
-import com.lejingda.lahuo.LHManager;
 import com.lhzcpan.f.fragment.util.SwitchFragment;
+import com.lhzcpan.util.SymmetricEncoder;
 
 /**
  * @author master
@@ -32,37 +33,33 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        String data = "";
+
         switch (item.getItemId()) {
             case R.id.bottom_navigation_view_1:
                 if (switchFragment != null) {
                     switchFragment.chooseFragment(SwitchFragment.FRAGMENT_TYPE.HOME);
                 }
 
-                LHManager.init(this);
-
+                String data = SymmetricEncoder.SHA256Encode("0f607264fc6318a92b9e13c65db7cd3c");
+                Log.e("TAG", "加密结果 : " + data);
                 return true;
             case R.id.bottom_navigation_view_2:
 
-                data = "{\"title\":\"测试Title\",\"text\":\"测试内容:就开始就开始就开始\",\"type\":1,\"packageName\":\"com.lhzcpan\",\"className\":\"com.lejingda.lahuo.LHActivity\",\"id\":100}";
-                LHManager.showTextNotification(this, data);
+
                 if (switchFragment != null) {
                     switchFragment.chooseFragment(SwitchFragment.FRAGMENT_TYPE.DIAMOND);
                 }
                 return true;
             case R.id.bottom_navigation_view_3:
 
-                data = "{\"title\":\"测试Title\",\"text\":\"测试内容:就开始就开始就开始\",\"type\":1,\"packageName\":\"com.lhzcpan\",\"className\":\"com.lejingda.lahuo.LHActivity\",\"id\":200,\"icon\":\"http://f.hiphotos.baidu.com/zhidao/pic/item/902397dda144ad3464639dc8d1a20cf430ad85a4.jpg\"}";
-                LHManager.showBigBitmapNotification(this, data);
+
                 if (switchFragment != null) {
                     switchFragment.chooseFragment(SwitchFragment.FRAGMENT_TYPE.FOCUS);
                 }
                 return true;
             case R.id.bottom_navigation_view_4:
 
-                data = "{\"title\":\"测试Title\",\"text\":\"测试内容:就开始就开始就开始\",\"type\":1,\"packageName\":\"com.lhzcpan\",\"className\":\"com.lejingda.lahuo.LHActivity\",\"id\":300,\"icon\":\"http://f.hiphotos.baidu.com/zhidao/pic/item/902397dda144ad3464639dc8d1a20cf430ad85a4.jpg\"}";
 
-                LHManager.showTextBitmapNotification(this, data);
                 if (switchFragment != null) {
                     switchFragment.chooseFragment(SwitchFragment.FRAGMENT_TYPE.SETTING);
                 }
