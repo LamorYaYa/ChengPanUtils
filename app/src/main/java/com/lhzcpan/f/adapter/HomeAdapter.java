@@ -29,6 +29,9 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<HomeBean> mlist = new ArrayList<>();
     private OnRecyclerViewOnClickListener mListener;
 
+    private static final int TYPE_NORMAL = 0;
+    private static final int TYPE_FOOTER = 1;
+
     public HomeAdapter(Context mContext, List<HomeBean> mlist) {
         this.mContext = mContext;
         this.mInflater = LayoutInflater.from(mContext);
@@ -46,32 +49,48 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(mInflater.inflate(R.layout.home_list_item_layout, parent, false), mListener);
+        switch (viewType) {
+            case TYPE_NORMAL:
+                return new ViewHolder(mInflater.inflate(R.layout.home_list_item_layout, parent, false), mListener);
+            case TYPE_FOOTER:
+                return new FooterViewHolder(mInflater.inflate(R.layout.home_list_item_layout_footer, parent, false));
+        }
+        return null;
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        HomeBean homeBean = mlist.get(position);
-        if (homeBean.getImgUrl().startsWith("http")) {
-            Glide.with(mContext)
-                    .load(homeBean.getImgUrl())
-                    .asBitmap()
-                    .placeholder(R.drawable.ic_ball)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .error(R.drawable.ic_ball)
-                    .centerCrop()
-                    .into(((ViewHolder) holder).iImageView);
-        } else {
-            ((ViewHolder) holder).iImageView.setImageResource(R.drawable.ic_ball);
+        if(holder instanceof ViewHolder){
+            HomeBean homeBean = mlist.get(position);
+            if (homeBean.getImgUrl().startsWith("http")) {
+                Glide.with(mContext)
+                        .load(homeBean.getImgUrl())
+                        .asBitmap()
+                        .placeholder(R.mipmap.ic_launcher)
+                        .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                        .error(R.mipmap.ic_launcher)
+                        .centerCrop()
+                        .into(((ViewHolder) holder).iImageView);
+            } else {
+                ((ViewHolder) holder).iImageView.setImageResource(R.mipmap.ic_launcher);
+            }
+            ((ViewHolder) holder).iTextView.setText(homeBean.getTitle());
         }
-        ((ViewHolder) holder).iTextView.setText(homeBean.getTitle());
     }
 
     @Override
     public int getItemCount() {
-        return mlist.size();
+        return mlist.size() + 1;
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        if (position == mlist.size()) {
+            return HomeAdapter.TYPE_FOOTER;
+        } else {
+            return HomeAdapter.TYPE_NORMAL;
+        }
+    }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -97,5 +116,12 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
+    public class FooterViewHolder extends RecyclerView.ViewHolder {
+
+        public FooterViewHolder(View itemView) {
+            super(itemView);
+        }
+
+    }
 
 }

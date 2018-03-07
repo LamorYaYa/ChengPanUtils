@@ -1,7 +1,9 @@
 package com.lhzcpan.f.util;
 
 /**
- * Created by master on 2018/1/25.
+ *
+ * @author master
+ * @date 2018/1/25
  */
 
 public class Constant {

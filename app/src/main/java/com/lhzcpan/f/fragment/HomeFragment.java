@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.lhzcpan.LogUtils;
 import com.lhzcpan.R;
 import com.lhzcpan.f.adapter.HomeAdapter;
 import com.lhzcpan.f.bean.HomeBean;
@@ -19,10 +20,10 @@ import com.lhzcpan.f.interfaces.IHomeInterface;
 import com.lhzcpan.f.interfaces.OnRecyclerViewOnClickListener;
 import com.lhzcpan.f.presenter.HomePresenters;
 
+import java.util.Calendar;
 import java.util.List;
 
 /**
- *
  * @author master
  * @date 2018/1/19
  */
@@ -34,6 +35,11 @@ public class HomeFragment extends Fragment implements IHomeInterface.View {
     private HomeAdapter mHomeAdapter;
     private IHomeInterface.Presenter presenter;
 
+
+    private int mYear = Calendar.getInstance().get(Calendar.YEAR);
+    private int mMonth = Calendar.getInstance().get(Calendar.MONTH);
+    private int mDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -42,7 +48,7 @@ public class HomeFragment extends Fragment implements IHomeInterface.View {
         initViews(view);
 
         presenter = new HomePresenters(this, getContext());
-        presenter.loadPosts(System.currentTimeMillis(), true);
+        presenter.start();
 
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -54,15 +60,46 @@ public class HomeFragment extends Fragment implements IHomeInterface.View {
         return view;
     }
 
-    private void initViews(View view) {
+    @Override
+    public void initViews(View view) {
         recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         refreshLayout = view.findViewById(R.id.refreshLayout);
         refreshLayout.setColorSchemeResources(R.color.colorPrimary);
 
-    }
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
+            boolean isSlidingToLast = false;
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                LinearLayoutManager linearLayoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                // 当不滚动时
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    // 获取最后一个完全显示的 item position
+                    int lastVisibleItem = linearLayoutManager.findLastCompletelyVisibleItemPosition();
+                    int totalItemCount = linearLayoutManager.getItemCount();
+
+                    // 判断是否滚动到底部并且向下滑动
+                    if (lastVisibleItem == (totalItemCount - 1) && isSlidingToLast) {
+                        Calendar c = Calendar.getInstance();
+                        c.set(mYear, mMonth, --mDay);
+                        LogUtils.e(String.format("%s年%s月%s日", mYear, mMonth, mDay));
+                        presenter.loadMore(c.getTimeInMillis());
+                    }
+                }
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                isSlidingToLast = dy > 0;
+            }
+        });
+    }
 
     @Override
     public void showLoading() {

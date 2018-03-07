@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
 
         // 初始化 fragment
-//        switchFragment = new SwitchFragment(getSupportFragmentManager());
+        switchFragment = new SwitchFragment(getSupportFragmentManager());
 
     }
 

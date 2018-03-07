@@ -14,6 +14,7 @@ import java.util.List;
 public interface IHomeInterface {
 
     interface View {
+        void initViews(android.view.View view);
         void showLoading();
         void hideLoading();
         void showResults(List<HomeBean> list);
@@ -21,8 +22,10 @@ public interface IHomeInterface {
     }
 
     interface Presenter {
+        void start();
         void loadPosts(long date, boolean clearing);
         void refresh();
+        void loadMore(long date);
         void startReading(int position);
     }
 
