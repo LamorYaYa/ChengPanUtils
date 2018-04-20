@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentTransaction;
 
 import com.lhzcpan.R;
 import com.lhzcpan.f.fragment.HomeFragment;
+import com.lhzcpan.f.fragment.SwipeFragment;
 
 /**
  * @author master
@@ -20,7 +21,7 @@ public class SwitchFragment {
 
 
     private static HomeFragment mHomeFragment;
-    private static HomeFragment mDiamondFragment;
+    private static SwipeFragment mDiamondFragment;
     private static HomeFragment mFocusFragment;
     private static HomeFragment mSettingFragment;
 
@@ -69,7 +70,7 @@ public class SwitchFragment {
                 break;
             case DIAMOND:
                 if (mDiamondFragment == null) {
-                    mDiamondFragment = new HomeFragment();
+                    mDiamondFragment = new SwipeFragment();
                     transaction.add(R.id.content, mDiamondFragment);
                 }
                 hiderFragment(transaction);
@@ -78,13 +79,13 @@ public class SwitchFragment {
                 transaction.commit();
                 break;
             case FOCUS:
-                if (mHomeFragment == null) {
-                    mHomeFragment = new HomeFragment();
-                    transaction.add(R.id.content, mHomeFragment);
+                if (mFocusFragment == null) {
+                    mFocusFragment = new HomeFragment();
+                    transaction.add(R.id.content, mFocusFragment);
                 }
                 hiderFragment(transaction);
                 transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                transaction.show(mHomeFragment);
+                transaction.show(mFocusFragment);
                 transaction.commit();
                 break;
             case SETTING:

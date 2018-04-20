@@ -60,7 +60,7 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if(holder instanceof ViewHolder){
+        if (holder instanceof ViewHolder) {
             HomeBean homeBean = mlist.get(position);
             if (homeBean.getImgUrl().startsWith("http")) {
                 Glide.with(mContext)
